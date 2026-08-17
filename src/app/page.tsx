@@ -75,6 +75,54 @@ export default async function Home() {
     },
   ];
 
+  const projects = [
+    {
+      number: "01",
+      title: "Aurelia Residences",
+      location: "Tokyo, Japan",
+      category: "Residential Development",
+      year: "2026",
+      background: "#cbbba7",
+    },
+    {
+      number: "02",
+      title: "Vela House",
+      location: "Fukuoka, Japan",
+      category: "Private Residence",
+      year: "2025",
+      background: "#d8d3ca",
+    },
+    {
+      number: "03",
+      title: "Harbor Commons",
+      location: "Yokohama, Japan",
+      category: "Mixed-Use Development",
+      year: "2025",
+      background: "#b99070",
+    },
+  ];
+
+  const principles = [
+    {
+      number: "01",
+      title: "Considered from every angle",
+      description:
+        "Every decision begins with a clear understanding of place, people, and long-term purpose.",
+    },
+    {
+      number: "02",
+      title: "Built with lasting value",
+      description:
+        "We focus on durable materials, precise execution, and spaces designed to stand the test of time.",
+    },
+    {
+      number: "03",
+      title: "One connected process",
+      description:
+        "Design, development, and construction work together from the first idea to final delivery.",
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="mx-auto flex h-24 max-w-[1440px] items-center justify-between px-10">
@@ -259,6 +307,270 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      {/* Featured Projects */}
+      <section id="projects" className="bg-background">
+        <div className="mx-auto max-w-[1440px] px-10 py-32">
+          <div className="flex items-end justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+                Selected Work
+              </p>
+
+              <h2 className="mt-8 max-w-3xl font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+                Places shaped with purpose.
+              </h2>
+            </div>
+
+            <a
+              href="#contact"
+              className="border-b border-foreground pb-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-copper"
+            >
+              Start a Project ↗
+            </a>
+          </div>
+
+          <div className="mt-20 grid grid-cols-12 gap-x-8 gap-y-20">
+            {projects.map((project, index) => (
+              <article
+                key={project.number}
+                className={`group ${
+                  index === 0
+                    ? "col-span-7"
+                    : index === 1
+                      ? "col-span-5 mt-24"
+                      : "col-span-5 col-start-8"
+                }`}
+              >
+                <div
+                  className="relative aspect-[4/3] overflow-hidden"
+                  style={{ backgroundColor: project.background }}
+                >
+                  <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-background/50" />
+
+                  <div className="absolute inset-x-[20%] bottom-0 h-[72%] bg-foreground transition-transform duration-500 group-hover:-translate-y-3">
+                    <div className="grid h-full grid-cols-3 gap-3 p-5">
+                      {Array.from({ length: 12 }).map((_, windowIndex) => (
+                        <div
+                          key={windowIndex}
+                          className="border border-white/20 bg-copper/70"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <span className="absolute left-6 top-6 text-xs font-semibold tracking-[0.2em]">
+                    {project.number}
+                  </span>
+
+                  <span className="absolute bottom-6 right-6 text-xs uppercase tracking-[0.14em]">
+                    {project.year}
+                  </span>
+                </div>
+
+                <div className="mt-6 flex items-start justify-between border-t border-neutral-300 pt-5">
+                  <div>
+                    <h3 className="font-heading text-3xl font-medium">
+                      {project.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm text-neutral-500">
+                      {project.category}
+                    </p>
+                  </div>
+
+                  <p className="text-xs uppercase tracking-[0.14em] text-neutral-500">
+                    {project.location}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* Why ELEVORA / Process */}
+      <section id="process" className="bg-stone-beige">
+        <div className="mx-auto max-w-[1440px] px-10 py-32">
+          <div className="grid grid-cols-[0.8fr_1.2fr] gap-24">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+                Why ELEVORA
+              </p>
+
+              <h2 className="mt-8 max-w-lg font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+                A better way to build.
+              </h2>
+
+              <p className="mt-8 max-w-md text-lg leading-8 text-neutral-600">
+                We bring design thinking, technical knowledge, and responsible
+                development together in one clear process.
+              </p>
+            </div>
+
+            <div className="border-t border-foreground/30">
+              {principles.map((principle) => (
+                <article
+                  key={principle.number}
+                  className="group grid grid-cols-[80px_1fr_1fr] gap-8 border-b border-foreground/30 py-10"
+                >
+                  <span className="text-xs font-semibold tracking-[0.2em] text-copper">
+                    {principle.number}
+                  </span>
+
+                  <h3 className="font-heading text-2xl font-medium transition-colors group-hover:text-copper">
+                    {principle.title}
+                  </h3>
+
+                  <p className="leading-7 text-neutral-600">
+                    {principle.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Contact */}
+      <section id="contact" className="bg-copper text-white">
+        <div className="mx-auto max-w-[1440px] px-10 py-32">
+          <div className="grid grid-cols-[1.2fr_0.8fr] gap-24">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+                Start a Project
+              </p>
+
+              <h2 className="mt-8 max-w-4xl font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
+                Let&apos;s create something built to last.
+              </h2>
+
+              {/* <a
+                href="mailto:hello@elevora.jp"
+                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-60"
+              >
+                hello@elevora.jp ↗
+              </a> */}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@elevora.jp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-60"
+              >
+                hello@elevora.jp ↗
+              </a>
+            </div>
+
+            <div className="flex flex-col justify-end border-l border-white/30 pl-12">
+              <p className="max-w-md text-lg leading-8 text-white/80">
+                Whether you are planning a residence, commercial space, or a
+                larger development, we would be glad to hear about your vision.
+              </p>
+
+              <div className="mt-12 space-y-8 border-t border-white/30 pt-8">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-white/60">
+                    Office
+                  </p>
+                  <p className="mt-3 text-lg">Tokyo, Japan</p>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-white/60">
+                    Telephone
+                  </p>
+                  <a
+                    href="tel:+81312345678"
+                    className="mt-3 block text-lg hover:opacity-60"
+                  >
+                    +81 3 1234 5678
+                  </a>
+                </div>
+
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-white/60">
+                    Business Hours
+                  </p>
+                  <p className="mt-3 text-lg">Mon–Fri / 09:00–18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Footer */}
+      <footer className="bg-foreground text-background">
+        <div className="mx-auto max-w-[1440px] px-10">
+          <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 border-b border-white/20 py-20">
+            <div>
+              <a href="#" className="inline-block leading-none">
+                <span className="block font-heading text-3xl font-semibold tracking-[0.25em]">
+                  ELEVORA
+                </span>
+
+                <span className="mt-3 block text-[9px] font-semibold tracking-[0.45em] text-copper">
+                  DEVELOPMENTS
+                </span>
+              </a>
+
+              <p className="mt-8 max-w-md leading-7 text-white/60">
+                Thoughtful spaces shaped through design, construction, and
+                responsible development.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-16">
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-white/40">
+                  Navigate
+                </p>
+
+                <nav className="mt-6 flex flex-col gap-4">
+                  {navigation.map((item) => (
+                    <a
+                      key={item}
+                      href={`#${item.toLowerCase()}`}
+                      className="transition-colors hover:text-copper"
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-white/40">
+                  Contact
+                </p>
+
+                <div className="mt-6 flex flex-col gap-4">
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=your-email@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-copper"
+                  >
+                    Email Us
+                  </a>
+
+                  <a
+                    href="tel:+81312345678"
+                    className="transition-colors hover:text-copper"
+                  >
+                    +81 3 1234 5678
+                  </a>
+
+                  <span className="text-white/60">Tokyo, Japan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between py-8 text-xs uppercase tracking-[0.14em] text-white/40">
+            <p>© 2026 ELEVORA Developments</p>
+            <a href="#" className="transition-colors hover:text-copper">
+              Back to Top ↑
+            </a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
