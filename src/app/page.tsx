@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 type HomePageFields = {
   hero_eyebrow: string;
   hero_title: string;
@@ -19,6 +21,40 @@ type HomePageFields = {
   service_2_description: string;
   service_3_title: string;
   service_3_description: string;
+  projects_eyebrow: string;
+  projects_title: string;
+  project_1_title: string;
+  project_1_location: string;
+  project_1_category: string;
+  project_1_year: string;
+  project_2_title: string;
+  project_2_location: string;
+  project_2_category: string;
+  project_2_year: string;
+  project_3_title: string;
+  project_3_location: string;
+  project_3_category: string;
+  project_3_year: string;
+
+  why_eyebrow: string;
+  why_title: string;
+  why_description: string;
+  principle_1_title: string;
+  principle_1_description: string;
+  principle_2_title: string;
+  principle_2_description: string;
+  principle_3_title: string;
+  principle_3_description: string;
+
+  contact_eyebrow: string;
+  contact_title: string;
+  contact_description: string;
+  contact_button_text: string;
+  contact_button_url: string;
+  contact_email: string;
+  office_location: string;
+  phone_number: string;
+  business_hours: string;
 };
 
 type WordPressPage = {
@@ -78,26 +114,26 @@ export default async function Home() {
   const projects = [
     {
       number: "01",
-      title: "Aurelia Residences",
-      location: "Tokyo, Japan",
-      category: "Residential Development",
-      year: "2026",
+      title: content.project_1_title,
+      location: content.project_1_location,
+      category: content.project_1_category,
+      year: content.project_1_year,
       background: "#cbbba7",
     },
     {
       number: "02",
-      title: "Vela House",
-      location: "Fukuoka, Japan",
-      category: "Private Residence",
-      year: "2025",
+      title: content.project_2_title,
+      location: content.project_2_location,
+      category: content.project_2_category,
+      year: content.project_2_year,
       background: "#d8d3ca",
     },
     {
       number: "03",
-      title: "Harbor Commons",
-      location: "Yokohama, Japan",
-      category: "Mixed-Use Development",
-      year: "2025",
+      title: content.project_3_title,
+      location: content.project_3_location,
+      category: content.project_3_category,
+      year: content.project_3_year,
       background: "#b99070",
     },
   ];
@@ -105,21 +141,18 @@ export default async function Home() {
   const principles = [
     {
       number: "01",
-      title: "Considered from every angle",
-      description:
-        "Every decision begins with a clear understanding of place, people, and long-term purpose.",
+      title: content.principle_1_title,
+      description: content.principle_1_description,
     },
     {
       number: "02",
-      title: "Built with lasting value",
-      description:
-        "We focus on durable materials, precise execution, and spaces designed to stand the test of time.",
+      title: content.principle_2_title,
+      description: content.principle_2_description,
     },
     {
       number: "03",
-      title: "One connected process",
-      description:
-        "Design, development, and construction work together from the first idea to final delivery.",
+      title: content.principle_3_title,
+      description: content.principle_3_description,
     },
   ];
 
@@ -160,19 +193,19 @@ export default async function Home() {
       <section className="border-l-[14px] border-copper">
         <div className="mx-auto grid min-h-[760px] max-w-[1440px] grid-cols-[0.95fr_1.05fr] gap-16 px-10 py-14">
           <div className="flex flex-col justify-center">
-            <p className="mb-8 text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+            <p className="mb-8 animate-fade-up text-xs font-semibold uppercase tracking-[0.22em] text-copper">
               {content.hero_eyebrow}
             </p>
 
-            <h1 className="max-w-2xl font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
+            <h1 className="max-w-2xl animate-fade-up animation-delay-200 font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
               {content.hero_title}
             </h1>
 
-            <p className="mt-8 max-w-xl text-lg leading-8 text-neutral-600">
+            <p className="mt-8 max-w-xl animate-fade-up animation-delay-300 text-lg leading-8 text-neutral-600">
               {content.hero_description}
             </p>
 
-            <div className="mt-12 flex items-center gap-10">
+            <div className="mt-12 flex animate-fade-up animation-delay-400 items-center gap-10">
               <a
                 href={content.primary_button_url}
                 className="bg-copper px-8 py-5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-foreground"
@@ -194,7 +227,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="relative min-h-[650px] overflow-hidden bg-[#d8d3ca]">
+          <div className="relative min-h-[650px] animate-fade-up animation-delay-200 overflow-hidden bg-[#d8d3ca]">
             <div className="absolute -right-16 top-10 h-72 w-72 rounded-full bg-[#ebe7df]" />
 
             <div className="absolute bottom-0 left-[20%] h-[80%] w-[62%] bg-[#2c2c2a] [clip-path:polygon(18%_10%,50%_0,82%_10%,100%_100%,0_100%)]">
@@ -226,7 +259,7 @@ export default async function Home() {
 
       {/* About */}
       <section id="about" className="border-t border-neutral-300">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-20 px-10 py-32">
+        <Reveal className="mx-auto grid max-w-[1440px] grid-cols-2 gap-20 px-10 py-32">
           <div className="relative min-h-[520px] overflow-hidden bg-stone-beige">
             <div className="absolute -left-20 bottom-[-120px] h-96 w-96 rounded-full border-[70px] border-copper/70" />
             <div className="absolute right-16 top-16 h-60 w-44 border border-foreground/40" />
@@ -271,12 +304,15 @@ export default async function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Services */}
       <section id="services" className="bg-foreground text-background">
-        <div className="mx-auto max-w-[1440px] px-10 py-32">
+        <Reveal
+            className="mx-auto max-w-[1440px] px-10 py-32"
+            delay={300}
+          >
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
             {content.services_eyebrow}
           </p>
@@ -305,19 +341,19 @@ export default async function Home() {
               </article>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
       {/* Featured Projects */}
       <section id="projects" className="bg-background">
-        <div className="mx-auto max-w-[1440px] px-10 py-32">
+        <Reveal className="mx-auto max-w-[1440px] px-10 py-32">
           <div className="flex items-end justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
-                Selected Work
+                {content.projects_eyebrow}
               </p>
 
               <h2 className="mt-8 max-w-3xl font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
-                Places shaped with purpose.
+                {content.projects_title}
               </h2>
             </div>
 
@@ -333,13 +369,12 @@ export default async function Home() {
             {projects.map((project, index) => (
               <article
                 key={project.number}
-                className={`group ${
-                  index === 0
+                className={`group ${index === 0
                     ? "col-span-7"
                     : index === 1
                       ? "col-span-5 mt-24"
                       : "col-span-5 col-start-8"
-                }`}
+                  }`}
               >
                 <div
                   className="relative aspect-[4/3] overflow-hidden"
@@ -385,24 +420,23 @@ export default async function Home() {
               </article>
             ))}
           </div>
-        </div>
+        </Reveal>
       </section>
       {/* Why ELEVORA / Process */}
       <section id="process" className="bg-stone-beige">
-        <div className="mx-auto max-w-[1440px] px-10 py-32">
+        <Reveal className="mx-auto max-w-[1440px] px-10 py-32 delay={300}">
           <div className="grid grid-cols-[0.8fr_1.2fr] gap-24">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
-                Why ELEVORA
+                {content.why_eyebrow}
               </p>
 
               <h2 className="mt-8 max-w-lg font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
-                A better way to build.
+                {content.why_title}
               </h2>
 
               <p className="mt-8 max-w-md text-lg leading-8 text-neutral-600">
-                We bring design thinking, technical knowledge, and responsible
-                development together in one clear process.
+                {content.why_description}
               </p>
             </div>
 
@@ -427,41 +461,34 @@ export default async function Home() {
               ))}
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
       {/* Contact */}
       <section id="contact" className="bg-copper text-white">
-        <div className="mx-auto max-w-[1440px] px-10 py-32">
+        <Reveal className="mx-auto max-w-[1440px] px-10 py-32">
           <div className="grid grid-cols-[1.2fr_0.8fr] gap-24">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
-                Start a Project
+                {content.contact_eyebrow}
               </p>
 
               <h2 className="mt-8 max-w-4xl font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
-                Let&apos;s create something built to last.
+                {content.contact_title}
               </h2>
 
-              {/* <a
-                href="mailto:hello@elevora.jp"
-                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-60"
-              >
-                hello@elevora.jp ↗
-              </a> */}
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@elevora.jp"
+                href={content.contact_button_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-60"
+                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-70"
               >
-                hello@elevora.jp ↗
+                {content.contact_button_text}
               </a>
             </div>
 
             <div className="flex flex-col justify-end border-l border-white/30 pl-12">
               <p className="max-w-md text-lg leading-8 text-white/80">
-                Whether you are planning a residence, commercial space, or a
-                larger development, we would be glad to hear about your vision.
+                {content.contact_description}
               </p>
 
               <div className="mt-12 space-y-8 border-t border-white/30 pt-8">
@@ -469,18 +496,18 @@ export default async function Home() {
                   <p className="text-xs uppercase tracking-[0.18em] text-white/60">
                     Office
                   </p>
-                  <p className="mt-3 text-lg">Tokyo, Japan</p>
+                  <p className="mt-3 text-lg">{content.office_location}</p>
                 </div>
 
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-white/60">
-                    Telephone
+                    Phone
                   </p>
                   <a
-                    href="tel:+81312345678"
+                    href={`tel:${content.phone_number.replace(/[^\d+]/g, "")}`}
                     className="mt-3 block text-lg hover:opacity-60"
                   >
-                    +81 3 1234 5678
+                    {content.phone_number}
                   </a>
                 </div>
 
@@ -488,16 +515,19 @@ export default async function Home() {
                   <p className="text-xs uppercase tracking-[0.18em] text-white/60">
                     Business Hours
                   </p>
-                  <p className="mt-3 text-lg">Mon–Fri / 09:00–18:00</p>
+                  <p className="mt-3 text-lg">{content.business_hours}</p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
       {/* Footer */}
       <footer className="bg-foreground text-background">
-        <div className="mx-auto max-w-[1440px] px-10">
+        <Reveal
+            className="mx-auto max-w-[1440px] px-10"
+            delay={300}
+          >
           <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 border-b border-white/20 py-20">
             <div>
               <a href="#" className="inline-block leading-none">
@@ -542,22 +572,24 @@ export default async function Home() {
 
                 <div className="mt-6 flex flex-col gap-4">
                   <a
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=your-email@gmail.com"
+                    href={content.contact_button_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="transition-colors hover:text-copper"
                   >
-                    Email Us
+                    {content.contact_email}
                   </a>
 
                   <a
-                    href="tel:+81312345678"
+                    href={`tel:${content.phone_number.replace(/[^\d+]/g, "")}`}
                     className="transition-colors hover:text-copper"
                   >
-                    +81 3 1234 5678
+                    {content.phone_number}
                   </a>
 
-                  <span className="text-white/60">Tokyo, Japan</span>
+                  <span className="text-white/60">
+                    {content.office_location}
+                  </span>
                 </div>
               </div>
             </div>
@@ -569,7 +601,7 @@ export default async function Home() {
               Back to Top ↑
             </a>
           </div>
-        </div>
+        </Reveal>
       </footer>
     </main>
   );
