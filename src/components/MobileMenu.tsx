@@ -11,19 +11,24 @@ export default function MobileMenu({ items }: MobileMenuProps) {
 
   return (
     <div className="lg:hidden">
-      <button
-        type="button"
-        aria-label={isOpen ? "Close menu" : "Open menu"}
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((current) => !current)}
-        className="flex h-11 w-11 items-center justify-center border border-foreground"
-      >
-        <span className="text-xl">{isOpen ? "×" : "☰"}</span>
-      </button>
+        <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            className="flex h-12 w-12 items-center justify-center border border-foreground text-xl focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-copper"
+            >
+            {isOpen ? "×" : "☰"}
+        </button>
 
       {isOpen && (
         <div className="fixed inset-x-0 top-24 z-50 border-t border-neutral-300 bg-background px-6 py-8 shadow-lg">
-          <nav className="flex flex-col">
+          <nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+            className="flex flex-col"
+            >
             {items.map((item) => (
               <a
                 key={item}

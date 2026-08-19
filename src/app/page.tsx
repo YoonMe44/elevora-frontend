@@ -1,5 +1,6 @@
 import Reveal from "@/components/Reveal";
 import MobileMenu from "@/components/MobileMenu";
+import PageMotion from "@/components/PageMotion";
 type HomePageFields = {
   hero_eyebrow: string;
   hero_title: string;
@@ -158,6 +159,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <PageMotion />
       <header className="mx-auto flex h-24 max-w-[1440px] items-center justify-between px-10">
         <a href="#" className="leading-none">
           <span className="block font-heading text-2xl font-semibold tracking-[0.25em]">
@@ -191,22 +193,37 @@ export default async function Home() {
       </header>
 
       {/* Hero */}
-      <section className="border-l-[14px] border-copper">
+      <section
+          data-hero-scene
+          className="border-l-[14px] border-copper"
+        >
         <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-10 sm:px-8 lg:min-h-[760px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:px-10 lg:py-14">
           <div className="flex flex-col justify-center">
-            <p className="mb-8 animate-fade-up text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+            <p
+              data-hero-eyebrow
+              className="mb-8 text-xs font-semibold uppercase tracking-[0.22em] text-copper"
+            >
               {content.hero_eyebrow}
             </p>
 
-            <h1 className="max-w-2xl font-heading text-4xl font-medium leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-7xl">
+            <h1
+              data-hero-title
+              className="max-w-2xl font-heading text-5xl font-medium leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl"
+            >
               {content.hero_title}
             </h1>
 
-            <p className="mt-8 max-w-xl animate-fade-up animation-delay-300 text-lg leading-8 text-neutral-600">
+            <p
+                data-hero-copy
+                className="mt-8 max-w-xl text-base leading-8 text-neutral-600 sm:text-lg"
+              >
               {content.hero_description}
             </p>
 
-            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10 lg:mt-12">
+            <div
+                data-hero-actions
+                className="mt-10 flex flex-col items-start gap-6 sm:mt-12 sm:flex-row sm:items-center sm:gap-10"
+              >
               <a
                 href={content.primary_button_url}
                 className="bg-copper px-8 py-5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-foreground"
@@ -228,10 +245,18 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="relative min-h-[420px] sm:min-h-[520px] lg:min-h-[650px] animate-fade-up animation-delay-200 overflow-hidden bg-[#d8d3ca]">
-            <div className="absolute -right-16 top-10 h-72 w-72 rounded-full bg-[#ebe7df]" />
-
-            <div className="absolute bottom-0 left-[20%] h-[80%] w-[62%] bg-[#2c2c2a] [clip-path:polygon(18%_10%,50%_0,82%_10%,100%_100%,0_100%)]">
+          <div
+              data-hero-visual
+              className="relative min-h-[420px] overflow-hidden bg-[#d8d3ca] sm:min-h-[560px] lg:min-h-[650px]"
+            >
+            <div
+              data-hero-orb
+              className="absolute -right-16 top-10 h-72 w-72 rounded-full bg-[#ebe7df]"
+            />
+            <div
+                data-hero-building
+                className="absolute bottom-0 left-[20%] h-[80%] w-[62%] bg-[#2c2c2a] [clip-path:polygon(18%_10%,50%_0,82%_10%,100%_100%,0_100%)]"
+              >
               <div className="absolute inset-x-[18%] bottom-[8%] top-[25%] bg-[#686967]">
                 <div className="grid h-full grid-cols-2 gap-3 p-5">
                   {Array.from({ length: 10 }).map((_, index) => (
@@ -358,83 +383,91 @@ export default async function Home() {
 
       {/* Featured Projects */}
       <section id="projects" className="bg-background">
-        <Reveal className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
-          <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
-                {content.projects_eyebrow}
-              </p>
+        <div className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
+          <Reveal>
+            <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
+                  {content.projects_eyebrow}
+                </p>
 
-              <h2 className="mt-6 max-w-3xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:mt-8 sm:text-5xl lg:text-6xl">
-                {content.projects_title}
-              </h2>
+                <h2 className="mt-8 max-w-4xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                  {content.projects_title}
+                </h2>
+              </div>
+
+              <a
+                href="#contact"
+                className="border-b border-foreground pb-2 text-xs font-semibold uppercase tracking-[0.14em]"
+              >
+                Start a Project ↗
+              </a>
             </div>
-
-            <a
-              href="#contact"
-              className="shrink-0 border-b border-foreground pb-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-copper"
-            >
-              Start a Project ↗
-            </a>
-          </div>
+          </Reveal>
 
           <div className="mt-12 grid grid-cols-1 gap-y-14 sm:mt-16 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 lg:mt-20 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
-            {projects.map((project, index) => (
-              <article
-                key={project.number}
-                className={`group ${
-                  index === 0
-                    ? "sm:col-span-2 lg:col-span-7"
-                    : index === 1
-                      ? "sm:col-span-1 lg:col-span-5 lg:mt-24"
-                      : "sm:col-span-1 lg:col-span-5 lg:col-start-8"
-                }`}
-              >
-                <div
-                  className="relative aspect-[4/3] overflow-hidden"
-                  style={{ backgroundColor: project.background }}
+            {projects.map((project, index) => {
+              const layoutClass =
+                index === 0
+                  ? "sm:col-span-2 lg:col-span-7"
+                  : index === 1
+                    ? "sm:col-span-1 lg:col-span-5 lg:mt-24"
+                    : "sm:col-span-1 lg:col-span-5 lg:col-start-8";
+
+              return (
+                <Reveal
+                  key={project.number}
+                  className={layoutClass}
+                  delay={index * 150}
                 >
-                  <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-background/50 sm:-right-16 sm:-top-16 sm:h-64 sm:w-64" />
+                  <article className="group h-full">
+                    <div
+                      className="relative aspect-[4/3] overflow-hidden transition-transform duration-500 ease-out group-hover:-translate-y-2"
+                      style={{ backgroundColor: project.background }}
+                    >
+                      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-background/60" />
 
-                  <div className="absolute inset-x-[18%] bottom-0 h-[72%] bg-foreground transition-transform duration-500 group-hover:-translate-y-2 lg:group-hover:-translate-y-3">
-                    <div className="grid h-full grid-cols-3 gap-2 p-3 sm:gap-3 sm:p-5">
-                      {Array.from({ length: 12 }).map((_, windowIndex) => (
-                        <div
-                          key={windowIndex}
-                          className="border border-white/20 bg-copper/70"
-                        />
-                      ))}
+                      <span className="absolute left-6 top-6 text-xs font-semibold tracking-[0.2em]">
+                        {project.number}
+                      </span>
+
+                      <span className="absolute bottom-6 right-6 text-xs font-semibold tracking-[0.2em]">
+                        {project.year}
+                      </span>
+
+                      <div className="absolute bottom-0 left-1/2 h-[70%] w-[60%] -translate-x-1/2 bg-foreground">
+                        <div className="grid h-full grid-cols-3 gap-3 p-6">
+                          {Array.from({ length: 12 }).map((_, windowIndex) => (
+                            <div
+                              key={windowIndex}
+                              className="border border-copper/70 bg-copper/70"
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <span className="absolute left-4 top-4 text-[10px] font-semibold tracking-[0.2em] sm:left-6 sm:top-6 sm:text-xs">
-                    {project.number}
-                  </span>
+                    <div className="mt-6 flex items-start justify-between border-t border-neutral-300 pt-6">
+                      <div>
+                        <h3 className="transition-colors duration-300 group-hover:text-copper font-heading text-3xl font-medium sm:text-4xl">
+                          {project.title}
+                        </h3>
 
-                  <span className="absolute bottom-4 right-4 text-[10px] uppercase tracking-[0.14em] sm:bottom-6 sm:right-6 sm:text-xs">
-                    {project.year}
-                  </span>
-                </div>
+                        <p className="mt-3 text-neutral-500">
+                          {project.category}
+                        </p>
+                      </div>
 
-                <div className="mt-5 flex flex-col gap-3 border-t border-neutral-300 pt-4 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:pt-5">
-                  <div>
-                    <h3 className="font-heading text-2xl font-medium sm:text-3xl">
-                      {project.title}
-                    </h3>
-
-                    <p className="mt-2 text-sm text-neutral-500">
-                      {project.category}
-                    </p>
-                  </div>
-
-                  <p className="text-[10px] uppercase tracking-[0.14em] text-neutral-500 sm:text-right sm:text-xs">
-                    {project.location}
-                  </p>
-                </div>
-              </article>
-            ))}
+                      <p className="text-right text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
+                        {project.location}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* Why ELEVORA / Process */}
