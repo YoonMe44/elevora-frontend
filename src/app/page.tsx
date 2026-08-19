@@ -1,5 +1,5 @@
 import Reveal from "@/components/Reveal";
-
+import MobileMenu from "@/components/MobileMenu";
 type HomePageFields = {
   hero_eyebrow: string;
   hero_title: string;
@@ -169,7 +169,7 @@ export default async function Home() {
           </span>
         </a>
 
-        <nav className="flex items-center gap-12">
+        <nav className="hidden items-center gap-12 lg:flex">
           {navigation.map((item) => (
             <a
               key={item}
@@ -183,21 +183,22 @@ export default async function Home() {
 
         <a
           href="#contact"
-          className="bg-foreground px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] text-background transition-colors hover:bg-copper"
+          className="hidden lg:inline-flex bg-foreground px-8 py-4 text-xs font-semibold uppercase tracking-[0.14em] text-background transition-colors hover:bg-copper"
         >
           Start a Project
         </a>
+        <MobileMenu items={navigation} />
       </header>
 
       {/* Hero */}
       <section className="border-l-[14px] border-copper">
-        <div className="mx-auto grid min-h-[760px] max-w-[1440px] grid-cols-[0.95fr_1.05fr] gap-16 px-10 py-14">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-10 sm:px-8 lg:min-h-[760px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:px-10 lg:py-14">
           <div className="flex flex-col justify-center">
             <p className="mb-8 animate-fade-up text-xs font-semibold uppercase tracking-[0.22em] text-copper">
               {content.hero_eyebrow}
             </p>
 
-            <h1 className="max-w-2xl animate-fade-up animation-delay-200 font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
+            <h1 className="max-w-2xl font-heading text-4xl font-medium leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-7xl">
               {content.hero_title}
             </h1>
 
@@ -205,7 +206,7 @@ export default async function Home() {
               {content.hero_description}
             </p>
 
-            <div className="mt-12 flex animate-fade-up animation-delay-400 items-center gap-10">
+            <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-10 lg:mt-12">
               <a
                 href={content.primary_button_url}
                 className="bg-copper px-8 py-5 text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-foreground"
@@ -227,7 +228,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="relative min-h-[650px] animate-fade-up animation-delay-200 overflow-hidden bg-[#d8d3ca]">
+          <div className="relative min-h-[420px] sm:min-h-[520px] lg:min-h-[650px] animate-fade-up animation-delay-200 overflow-hidden bg-[#d8d3ca]">
             <div className="absolute -right-16 top-10 h-72 w-72 rounded-full bg-[#ebe7df]" />
 
             <div className="absolute bottom-0 left-[20%] h-[80%] w-[62%] bg-[#2c2c2a] [clip-path:polygon(18%_10%,50%_0,82%_10%,100%_100%,0_100%)]">
@@ -259,46 +260,57 @@ export default async function Home() {
 
       {/* About */}
       <section id="about" className="border-t border-neutral-300">
-        <Reveal className="mx-auto grid max-w-[1440px] grid-cols-2 gap-20 px-10 py-32">
-          <div className="relative min-h-[520px] overflow-hidden bg-stone-beige">
-            <div className="absolute -left-20 bottom-[-120px] h-96 w-96 rounded-full border-[70px] border-copper/70" />
-            <div className="absolute right-16 top-16 h-60 w-44 border border-foreground/40" />
-            <span className="absolute bottom-10 right-10 font-heading text-8xl text-background/70">
+        <Reveal className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-5 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:py-32">
+          {/* About Visual */}
+          <div className="relative min-h-[340px] overflow-hidden bg-stone-beige sm:min-h-[440px] lg:min-h-[520px]">
+            <div className="absolute -bottom-20 -left-16 h-64 w-64 rounded-full border-[45px] border-copper/70 sm:-bottom-28 sm:-left-20 sm:h-80 sm:w-80 sm:border-[60px] lg:-bottom-[120px] lg:h-96 lg:w-96 lg:border-[70px]" />
+
+            <div className="absolute right-8 top-8 h-40 w-28 border border-foreground/40 sm:right-12 sm:top-12 sm:h-52 sm:w-36 lg:right-16 lg:top-16 lg:h-60 lg:w-44" />
+
+            <span className="absolute bottom-6 right-6 font-heading text-6xl text-background/70 sm:bottom-8 sm:right-8 sm:text-7xl lg:bottom-10 lg:right-10 lg:text-8xl">
               01
             </span>
           </div>
 
+          {/* About Content */}
           <div className="flex flex-col justify-center">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
               {content.about_eyebrow}
             </p>
 
-            <h2 className="mt-8 max-w-xl font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+            <h2 className="mt-6 max-w-xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:mt-8 sm:text-5xl lg:text-6xl">
               {content.about_title}
             </h2>
 
-            <p className="mt-10 max-w-xl text-lg leading-8 text-neutral-600">
+            <p className="mt-6 max-w-xl text-base leading-7 text-neutral-600 sm:mt-8 sm:text-lg sm:leading-8 lg:mt-10">
               {content.about_description}
             </p>
 
-            <div className="mt-14 grid grid-cols-3 border-t border-neutral-300 pt-8">
+            {/* Statistics */}
+            <div className="mt-10 grid grid-cols-3 gap-4 border-t border-neutral-300 pt-6 sm:mt-14 sm:gap-8 sm:pt-8">
               <div>
-                <strong className="font-heading text-3xl">15+</strong>
-                <p className="mt-2 text-xs uppercase tracking-wider text-neutral-500">
+                <strong className="font-heading text-2xl sm:text-3xl">
+                  15+
+                </strong>
+                <p className="mt-2 text-[10px] uppercase tracking-wider text-neutral-500 sm:text-xs">
                   Years
                 </p>
               </div>
 
               <div>
-                <strong className="font-heading text-3xl">48</strong>
-                <p className="mt-2 text-xs uppercase tracking-wider text-neutral-500">
+                <strong className="font-heading text-2xl sm:text-3xl">
+                  48
+                </strong>
+                <p className="mt-2 text-[10px] uppercase tracking-wider text-neutral-500 sm:text-xs">
                   Projects
                 </p>
               </div>
 
               <div>
-                <strong className="font-heading text-3xl">12</strong>
-                <p className="mt-2 text-xs uppercase tracking-wider text-neutral-500">
+                <strong className="font-heading text-2xl sm:text-3xl">
+                  12
+                </strong>
+                <p className="mt-2 text-[10px] uppercase tracking-wider text-neutral-500 sm:text-xs">
                   Awards
                 </p>
               </div>
@@ -310,32 +322,32 @@ export default async function Home() {
       {/* Services */}
       <section id="services" className="bg-foreground text-background">
         <Reveal
-            className="mx-auto max-w-[1440px] px-10 py-32"
-            delay={300}
-          >
+          className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32"
+          delay={300}
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
             {content.services_eyebrow}
           </p>
 
-          <h2 className="mt-8 max-w-3xl font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+          <h2 className="mt-6 max-w-3xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:mt-8 sm:text-5xl lg:text-6xl">
             {content.services_title}
           </h2>
 
-          <div className="mt-20 grid grid-cols-3 border-t border-white/20">
+          <div className="mt-12 grid grid-cols-1 border-t border-white/20 sm:mt-16 lg:mt-20 lg:grid-cols-3">
             {services.map((service) => (
               <article
                 key={service.number}
-                className="min-h-[360px] border-r border-white/20 px-8 py-10 first:border-l"
+                className="min-h-0 border-b border-white/20 py-10 sm:px-4 lg:min-h-[360px] lg:border-b-0 lg:border-r lg:px-8 lg:py-10 lg:first:border-l"
               >
                 <span className="text-xs tracking-[0.2em] text-copper">
                   {service.number}
                 </span>
 
-                <h3 className="mt-20 font-heading text-3xl font-medium">
+                <h3 className="mt-10 font-heading text-2xl font-medium sm:text-3xl lg:mt-20">
                   {service.title}
                 </h3>
 
-                <p className="mt-6 max-w-sm leading-7 text-white/60">
+                <p className="mt-4 max-w-sm text-sm leading-7 text-white/60 sm:mt-6 sm:text-base">
                   {service.description}
                 </p>
               </article>
@@ -343,47 +355,49 @@ export default async function Home() {
           </div>
         </Reveal>
       </section>
+
       {/* Featured Projects */}
       <section id="projects" className="bg-background">
-        <Reveal className="mx-auto max-w-[1440px] px-10 py-32">
-          <div className="flex items-end justify-between">
+        <Reveal className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
+          <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
                 {content.projects_eyebrow}
               </p>
 
-              <h2 className="mt-8 max-w-3xl font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+              <h2 className="mt-6 max-w-3xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:mt-8 sm:text-5xl lg:text-6xl">
                 {content.projects_title}
               </h2>
             </div>
 
             <a
               href="#contact"
-              className="border-b border-foreground pb-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-copper"
+              className="shrink-0 border-b border-foreground pb-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-copper"
             >
               Start a Project ↗
             </a>
           </div>
 
-          <div className="mt-20 grid grid-cols-12 gap-x-8 gap-y-20">
+          <div className="mt-12 grid grid-cols-1 gap-y-14 sm:mt-16 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 lg:mt-20 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
             {projects.map((project, index) => (
               <article
                 key={project.number}
-                className={`group ${index === 0
-                    ? "col-span-7"
+                className={`group ${
+                  index === 0
+                    ? "sm:col-span-2 lg:col-span-7"
                     : index === 1
-                      ? "col-span-5 mt-24"
-                      : "col-span-5 col-start-8"
-                  }`}
+                      ? "sm:col-span-1 lg:col-span-5 lg:mt-24"
+                      : "sm:col-span-1 lg:col-span-5 lg:col-start-8"
+                }`}
               >
                 <div
                   className="relative aspect-[4/3] overflow-hidden"
                   style={{ backgroundColor: project.background }}
                 >
-                  <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-background/50" />
+                  <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-background/50 sm:-right-16 sm:-top-16 sm:h-64 sm:w-64" />
 
-                  <div className="absolute inset-x-[20%] bottom-0 h-[72%] bg-foreground transition-transform duration-500 group-hover:-translate-y-3">
-                    <div className="grid h-full grid-cols-3 gap-3 p-5">
+                  <div className="absolute inset-x-[18%] bottom-0 h-[72%] bg-foreground transition-transform duration-500 group-hover:-translate-y-2 lg:group-hover:-translate-y-3">
+                    <div className="grid h-full grid-cols-3 gap-2 p-3 sm:gap-3 sm:p-5">
                       {Array.from({ length: 12 }).map((_, windowIndex) => (
                         <div
                           key={windowIndex}
@@ -393,18 +407,18 @@ export default async function Home() {
                     </div>
                   </div>
 
-                  <span className="absolute left-6 top-6 text-xs font-semibold tracking-[0.2em]">
+                  <span className="absolute left-4 top-4 text-[10px] font-semibold tracking-[0.2em] sm:left-6 sm:top-6 sm:text-xs">
                     {project.number}
                   </span>
 
-                  <span className="absolute bottom-6 right-6 text-xs uppercase tracking-[0.14em]">
+                  <span className="absolute bottom-4 right-4 text-[10px] uppercase tracking-[0.14em] sm:bottom-6 sm:right-6 sm:text-xs">
                     {project.year}
                   </span>
                 </div>
 
-                <div className="mt-6 flex items-start justify-between border-t border-neutral-300 pt-5">
+                <div className="mt-5 flex flex-col gap-3 border-t border-neutral-300 pt-4 sm:mt-6 sm:flex-row sm:items-start sm:justify-between sm:pt-5">
                   <div>
-                    <h3 className="font-heading text-3xl font-medium">
+                    <h3 className="font-heading text-2xl font-medium sm:text-3xl">
                       {project.title}
                     </h3>
 
@@ -413,7 +427,7 @@ export default async function Home() {
                     </p>
                   </div>
 
-                  <p className="text-xs uppercase tracking-[0.14em] text-neutral-500">
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-neutral-500 sm:text-right sm:text-xs">
                     {project.location}
                   </p>
                 </div>
@@ -422,20 +436,24 @@ export default async function Home() {
           </div>
         </Reveal>
       </section>
+
       {/* Why ELEVORA / Process */}
       <section id="process" className="bg-stone-beige">
-        <Reveal className="mx-auto max-w-[1440px] px-10 py-32 delay={300}">
-          <div className="grid grid-cols-[0.8fr_1.2fr] gap-24">
+        <Reveal
+          className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32"
+          delay={300}
+        >
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-copper">
                 {content.why_eyebrow}
               </p>
 
-              <h2 className="mt-8 max-w-lg font-heading text-6xl font-medium leading-[1.08] tracking-[-0.04em]">
+              <h2 className="mt-6 max-w-lg font-heading text-4xl font-medium leading-[1.08] tracking-[-0.04em] sm:text-5xl lg:mt-8 lg:text-6xl">
                 {content.why_title}
               </h2>
 
-              <p className="mt-8 max-w-md text-lg leading-8 text-neutral-600">
+              <p className="mt-6 max-w-md text-base leading-7 text-neutral-600 sm:text-lg sm:leading-8 lg:mt-8">
                 {content.why_description}
               </p>
             </div>
@@ -444,17 +462,17 @@ export default async function Home() {
               {principles.map((principle) => (
                 <article
                   key={principle.number}
-                  className="group grid grid-cols-[80px_1fr_1fr] gap-8 border-b border-foreground/30 py-10"
+                  className="group grid grid-cols-1 gap-4 border-b border-foreground/30 py-8 sm:grid-cols-[56px_1fr] sm:gap-6 lg:grid-cols-[80px_1fr_1fr] lg:gap-8 lg:py-10"
                 >
                   <span className="text-xs font-semibold tracking-[0.2em] text-copper">
                     {principle.number}
                   </span>
 
-                  <h3 className="font-heading text-2xl font-medium transition-colors group-hover:text-copper">
+                  <h3 className="font-heading text-xl font-medium transition-colors group-hover:text-copper sm:text-2xl">
                     {principle.title}
                   </h3>
 
-                  <p className="leading-7 text-neutral-600">
+                  <p className="leading-7 text-neutral-600 sm:col-start-2 lg:col-start-auto">
                     {principle.description}
                   </p>
                 </article>
@@ -463,16 +481,17 @@ export default async function Home() {
           </div>
         </Reveal>
       </section>
+
       {/* Contact */}
       <section id="contact" className="bg-copper text-white">
-        <Reveal className="mx-auto max-w-[1440px] px-10 py-32">
-          <div className="grid grid-cols-[1.2fr_0.8fr] gap-24">
+        <Reveal className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-24">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
                 {content.contact_eyebrow}
               </p>
 
-              <h2 className="mt-8 max-w-4xl font-heading text-7xl font-medium leading-[1.05] tracking-[-0.04em]">
+              <h2 className="mt-6 max-w-4xl font-heading text-4xl font-medium leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:mt-8 lg:text-7xl">
                 {content.contact_title}
               </h2>
 
@@ -480,18 +499,18 @@ export default async function Home() {
                 href={content.contact_button_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-14 inline-flex border-b border-white pb-3 font-heading text-3xl transition-opacity hover:opacity-70"
+                className="mt-10 inline-flex border-b border-white pb-3 font-heading text-xl transition-opacity hover:opacity-70 sm:text-2xl lg:mt-14 lg:text-3xl"
               >
                 {content.contact_button_text}
               </a>
             </div>
 
-            <div className="flex flex-col justify-end border-l border-white/30 pl-12">
-              <p className="max-w-md text-lg leading-8 text-white/80">
+            <div className="flex flex-col justify-end border-t border-white/30 pt-10 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <p className="max-w-md text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
                 {content.contact_description}
               </p>
 
-              <div className="mt-12 space-y-8 border-t border-white/30 pt-8">
+              <div className="mt-10 grid grid-cols-1 gap-8 border-t border-white/30 pt-8 sm:grid-cols-2 lg:mt-12 lg:grid-cols-1">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-white/60">
                     Office
@@ -505,7 +524,7 @@ export default async function Home() {
                   </p>
                   <a
                     href={`tel:${content.phone_number.replace(/[^\d+]/g, "")}`}
-                    className="mt-3 block text-lg hover:opacity-60"
+                    className="mt-3 block text-lg transition-opacity hover:opacity-60"
                   >
                     {content.phone_number}
                   </a>
@@ -522,20 +541,21 @@ export default async function Home() {
           </div>
         </Reveal>
       </section>
+
       {/* Footer */}
       <footer className="bg-foreground text-background">
         <Reveal
-            className="mx-auto max-w-[1440px] px-10"
-            delay={300}
-          >
-          <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 border-b border-white/20 py-20">
+          className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-10"
+          delay={300}
+        >
+          <div className="grid grid-cols-1 gap-14 border-b border-white/20 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20 lg:py-20">
             <div>
               <a href="#" className="inline-block leading-none">
-                <span className="block font-heading text-3xl font-semibold tracking-[0.25em]">
+                <span className="block font-heading text-2xl font-semibold tracking-[0.25em] sm:text-3xl">
                   ELEVORA
                 </span>
 
-                <span className="mt-3 block text-[9px] font-semibold tracking-[0.45em] text-copper">
+                <span className="mt-3 block text-[8px] font-semibold tracking-[0.45em] text-copper sm:text-[9px]">
                   DEVELOPMENTS
                 </span>
               </a>
@@ -546,7 +566,7 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-16">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-white/40">
                   Navigate
@@ -575,7 +595,7 @@ export default async function Home() {
                     href={content.contact_button_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-copper"
+                    className="break-all transition-colors hover:text-copper"
                   >
                     {content.contact_email}
                   </a>
@@ -595,8 +615,9 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between py-8 text-xs uppercase tracking-[0.14em] text-white/40">
+          <div className="flex flex-col gap-5 py-8 text-xs uppercase tracking-[0.14em] text-white/40 sm:flex-row sm:items-center sm:justify-between">
             <p>© 2026 ELEVORA Developments</p>
+
             <a href="#" className="transition-colors hover:text-copper">
               Back to Top ↑
             </a>
