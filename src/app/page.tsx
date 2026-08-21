@@ -81,7 +81,9 @@ async function getHomePageContent(): Promise<HomePageFields> {
   );
 
   if (!response.ok) {
-    throw new Error("Failed to retrieve ELEVORA content from WordPress.");
+    throw new Error(
+      `Failed to retrieve ELEVORA content from WordPress. Status: ${response.status}`
+    );
   }
 
   const pages = (await response.json()) as WordPressPage[];
