@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 import MobileMenu from "@/components/MobileMenu";
 import PageMotion from "@/components/PageMotion";
@@ -66,43 +69,88 @@ type WordPressPage = {
 
 const navigation = ["About", "Services", "Projects", "Process"];
 
-async function getHomePageContent(): Promise<HomePageFields> {
-  const apiUrl = process.env.WORDPRESS_API_URL;
+const WORDPRESS_API_URL =
+  "https://keikoko.website/yoonme/wp-json/wp/v2";
 
-  if (!apiUrl) {
-    throw new Error("WORDPRESS_API_URL is not defined.");
-  }
+export default function Home() {
+  const [content, setContent] = useState<HomePageFields | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const response = await fetch(
-  `${apiUrl}/pages?slug=elevora-home&acf_format=standard`,
-  {
-    cache: "no-store",
-    headers: {
-      "User-Agent": "Mozilla/5.0 ELEVORA/1.0",
-      Accept: "application/json",
-    },
-  },
-    );
+  useEffect(() => {
+    let cancelled = false;
 
-    if (!response.ok) {
-      const errorBody = await response.text();
+    async function loadContent() {
+      try {
+        const response = await fetch(
+          `${WORDPRESS_API_URL}/pages?slug=elevora-home&acf_format=standard`,
+          {
+            cache: "no-store",
+            headers: {
+              Accept: "application/json",
+            },
+          },
+        );
 
-      throw new Error(
-        `Failed to retrieve ELEVORA content from WordPress. Status: ${response.status}. Response: ${errorBody}`
-      );
+        if (!response.ok) {
+          throw new Error(
+            `Failed to retrieve ELEVORA content from WordPress. Status: ${response.status}`,
+          );
+        }
+
+        const pages = (await response.json()) as WordPressPage[];
+
+        if (!pages[0]?.acf) {
+          throw new Error("ELEVORA Home Page content was not found.");
+        }
+
+        if (!cancelled) {
+          setContent(pages[0].acf);
+        }
+      } catch (err) {
+        console.error(err);
+
+        if (!cancelled) {
+          setError(
+            err instanceof Error
+              ? err.message
+              : "Failed to load ELEVORA content.",
+          );
+        }
+      }
     }
 
-  const pages = (await response.json()) as WordPressPage[];
+    loadContent();
 
-  if (!pages[0]?.acf) {
-    throw new Error("ELEVORA Home Page content was not found.");
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (error) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-background px-6 text-foreground">
+        <div className="max-w-xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">
+            ELEVORA
+          </p>
+          <h1 className="mt-4 font-heading text-3xl font-medium">
+            Content could not be loaded
+          </h1>
+          <p className="mt-4 text-sm leading-7 text-neutral-600">{error}</p>
+        </div>
+      </main>
+    );
   }
 
-  return pages[0].acf;
-}
-
-export default async function Home() {
-  const content = await getHomePageContent();
+  if (!content) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-background text-foreground">
+        <p className="text-sm uppercase tracking-[0.18em] text-neutral-500">
+          Loading ELEVORA...
+        </p>
+      </main>
+    );
+  }
 
   const services = [
     {
