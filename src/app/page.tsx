@@ -74,17 +74,23 @@ async function getHomePageContent(): Promise<HomePageFields> {
   }
 
   const response = await fetch(
-    `${apiUrl}/pages?slug=elevora-home&acf_format=standard`,
-    {
-      cache: "no-store",
+  `${apiUrl}/pages?slug=elevora-home&acf_format=standard`,
+  {
+    cache: "no-store",
+    headers: {
+      "User-Agent": "Mozilla/5.0 ELEVORA/1.0",
+      Accept: "application/json",
     },
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to retrieve ELEVORA content from WordPress. Status: ${response.status}`
+  },
     );
-  }
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+
+      throw new Error(
+        `Failed to retrieve ELEVORA content from WordPress. Status: ${response.status}. Response: ${errorBody}`
+      );
+    }
 
   const pages = (await response.json()) as WordPressPage[];
 
