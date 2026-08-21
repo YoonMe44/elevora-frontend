@@ -69,12 +69,79 @@ type WordPressPage = {
 
 const navigation = ["About", "Services", "Projects", "Process"];
 
+const FALLBACK_CONTENT: HomePageFields = {
+  hero_eyebrow: "CONSTRUCTION × DEVELOPMENT × DESIGN",
+  hero_title: "Building beyond the expected.",
+  hero_description:
+    "ELEVORA creates considered places where modern living, lasting craft, and responsible development come together.",
+  primary_button_text: "EXPLORE PROJECTS",
+  primary_button_url: "#projects",
+  secondary_button_text: "OUR APPROACH",
+  secondary_button_url: "#about",
+
+  about_eyebrow: "ABOUT ELEVORA",
+  about_title: "Thoughtful places, built to endure.",
+  about_description:
+    "We bring architecture, construction, and development together to create spaces that feel considered from every angle. Each project is shaped by lasting materials, responsible decisions, and a clear understanding of how people live.",
+
+  services_eyebrow: "WHAT WE DO",
+  services_title: "From vision to lasting place.",
+  service_1_title: "Residential Development",
+  service_1_description:
+    "Considered homes and communities designed around modern ways of living.",
+  service_2_title: "Construction",
+  service_2_description:
+    "Precise project delivery with a focus on quality, durability, and detail.",
+  service_3_title: "Design & Planning",
+  service_3_description:
+    "Integrated design thinking that connects site, architecture, and long-term value.",
+
+  projects_eyebrow: "SELECTED WORK",
+  projects_title: "Places shaped with purpose.",
+  project_1_title: "Aurelia Residences",
+  project_1_location: "Tokyo, Japan",
+  project_1_category: "Residential Development",
+  project_1_year: "2026",
+  project_2_title: "Vela House",
+  project_2_location: "Fukuoka, Japan",
+  project_2_category: "Private Residence",
+  project_2_year: "2025",
+  project_3_title: "Harbor Commons",
+  project_3_location: "Yokohama, Japan",
+  project_3_category: "Mixed-Use Development",
+  project_3_year: "2025",
+
+  why_eyebrow: "WHY ELEVORA",
+  why_title: "A better way to build.",
+  why_description:
+    "We bring design thinking, technical knowledge, and responsible development together in one clear process.",
+  principle_1_title: "Considered from every angle",
+  principle_1_description:
+    "Every decision begins with a clear understanding of place, people, and long-term purpose.",
+  principle_2_title: "Built with lasting value",
+  principle_2_description:
+    "We focus on durable materials, precise execution, and spaces designed to stand the test of time.",
+  principle_3_title: "One connected process",
+  principle_3_description:
+    "Design, development, and construction work together from the first idea to final delivery.",
+
+  contact_eyebrow: "START A CONVERSATION",
+  contact_title: "Let’s shape what comes next.",
+  contact_description:
+    "Tell us about your vision, site, or upcoming project. We would be pleased to explore what we can build together.",
+  contact_button_text: "START A PROJECT ↗",
+  contact_button_url: "https://mail.google.com/mail/?view=cm&fs=1&to=hello@elevora.jp",
+  contact_email: "hello@elevora.jp",
+  office_location: "Tokyo, Japan",
+  phone_number: "+81 3 1234 5678",
+  business_hours: "Mon–Fri, 9:00–18:00 JST",
+};
+
 const WORDPRESS_API_URL =
   "https://keikoko.website/yoonme/wp-json/wp/v2";
 
 export default function Home() {
-  const [content, setContent] = useState<HomePageFields | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [content, setContent] = useState<HomePageFields>(FALLBACK_CONTENT);
 
   useEffect(() => {
     let cancelled = false;
@@ -107,15 +174,10 @@ export default function Home() {
           setContent(pages[0].acf);
         }
       } catch (err) {
-        console.error(err);
-
-        if (!cancelled) {
-          setError(
-            err instanceof Error
-              ? err.message
-              : "Failed to load ELEVORA content.",
-          );
-        }
+        console.warn(
+          "WordPress content could not be loaded; using bundled fallback content.",
+          err,
+        );
       }
     }
 
@@ -125,32 +187,6 @@ export default function Home() {
       cancelled = true;
     };
   }, []);
-
-  if (error) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-background px-6 text-foreground">
-        <div className="max-w-xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">
-            ELEVORA
-          </p>
-          <h1 className="mt-4 font-heading text-3xl font-medium">
-            Content could not be loaded
-          </h1>
-          <p className="mt-4 text-sm leading-7 text-neutral-600">{error}</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (!content) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-background text-foreground">
-        <p className="text-sm uppercase tracking-[0.18em] text-neutral-500">
-          Loading ELEVORA...
-        </p>
-      </main>
-    );
-  }
 
   const services = [
     {
